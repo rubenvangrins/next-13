@@ -5,16 +5,6 @@ export const getAllSlugs = `
         uri
       }
     }
-    allProjects(first: 1000) {
-      nodes {
-        uri
-      }
-    }
-    allArticles(first: 1000) {
-      nodes {
-        uri
-      }
-    }
   }
 `;
 
