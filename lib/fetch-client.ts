@@ -15,6 +15,9 @@ export const fetchAPI: any = async (
         query,
         variables,
       }),
+      next: {
+        revalidate: 0,
+      }
     });
 
     const json = await res.json();
