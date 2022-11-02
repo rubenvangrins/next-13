@@ -2,9 +2,6 @@ import React from 'react';
 
 import Link from 'next/link';
 
-import { fetchAPI } from '../../lib/fetch-client';
-import { getMenu } from '../../lib/query/pages.data';
-
 interface NavInterface {
   menuItems: {
     nodes: {
@@ -15,11 +12,7 @@ interface NavInterface {
   }
 }
 
-export const revalidate = 1;
-
-export default async function Nav() {
-  const { menuItems } = await fetchAPI(getMenu, { id: 'PRIMARY' }) as NavInterface;
-
+export default function Nav({ menuItems }: NavInterface) {
   return (
     <ul>
       {menuItems.nodes.map(({ id, label, uri }) => (
