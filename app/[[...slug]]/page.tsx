@@ -39,8 +39,7 @@ const fetchPageData = async (slug: string) => {
     body: JSON.stringify({
       query: getCurrentSlug,
       variables: { slug },
-    }),
-    cache: 'no-store',
+    })
   });
 
   const json = await result.json();
@@ -64,8 +63,8 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
 
   return (
     <>
-      <h1>{page.title && page.title}</h1>
-      {/* <h1>hoi</h1> */}
+      {/* <h1>{page.title && page.title}</h1> */}
+      <h1>hoi</h1>
     </>
   )
 }
