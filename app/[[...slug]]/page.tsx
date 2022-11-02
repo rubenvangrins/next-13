@@ -1,59 +1,16 @@
 import { fetchAPI } from "../../lib/fetch-client";
 import { getAllSlugs, getCurrentSlug } from "../../lib/query/pages.data";
 
-const fetchDynamicPages = async () => {
-  const result = await fetch('http://next13.gwst13.com/graphql', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      query: getAllSlugs,
-    })
-  });
-
-  const json = await result.json();
-
-  if (json.errors) {
-    console.error(json.errors);
-    throw new Error('Failed to fetch API');
-  }
-
-  return json.data.pages;
-}
-
 export async function generateStaticParams() {
-  const pages = await fetchDynamicPages();
+  const { pages } = await fetchAPI(getAllSlugs);
 
   return pages.nodes.map(({ uri }: { uri: string }) => ({
     slug: uri === '/' ? [''] : uri.split('/').filter((item) => item),
   }));
 }
 
-const fetchPageData = async (slug: string) => {
-  const result = await fetch('http://next13.gwst13.com/graphql', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      query: getCurrentSlug,
-      variables: { slug },
-    })
-  });
-
-  const json = await result.json();
-
-  if (json.errors) {
-    console.error(json.errors);
-    throw new Error('Failed to fetch API');
-  }
-
-  return json.data;
-};
-
 export default async function Page({ params }: { params: { slug: string[] } }) {
-  const { page } = await fetchPageData(!params.slug ? '/' : params.slug.join('/'));
+  const { page } = await fetchAPI(getCurrentSlug, {id: !params.slug ? '/' : params.slug.join('/')});
 
   if (!page) {
     return (
@@ -64,7 +21,6 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
   return (
     <>
       <h1>{page.title && page.title}</h1>
-      <h1>hoi</h1>
     </>
   )
 }

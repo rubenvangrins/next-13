@@ -1,38 +1,27 @@
-export const fetchAPI: any = async (
+export const fetchAPI = async (
   query: string,
-  variables?: { id?: string; idType?: string; language?: string },
-  maxTries: number = 3,
+  variables?: {
+    id?: string,
+    idType?: string,
+  },
 ) => {
-  const headers = { 'Content-Type': 'application/json' };
+  const result = await fetch('http://next13.gwst13.com/graphql', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      query,
+      variables,
+    })
+  });
 
-  if (!maxTries) throw new Error('Failed to fetch API');
+  const json = await result.json();
 
-  try {
-    const res = await fetch('https://rietveld.stellate.sh/', {
-      method: 'POST',
-      headers,
-      body: JSON.stringify({
-        query,
-        variables,
-      }),
-      next: {
-        revalidate: 0,
-      }
-    });
-
-    const json = await res.json();
-
-    if (json.errors) {
-      // eslint-disable-next-line no-console
-      console.log(json.errors);
-      throw new Error('Failed to fetch API');
-    }
-
-    return json.data;
-  } catch (e) {
-    // eslint-disable-next-line no-console
-    console.log(e);
+  if (json.errors) {
+    console.error(json.errors);
+    throw new Error('Failed to fetch API');
   }
 
-  return fetchAPI(query, variables, maxTries - 1);
+  return json.data;
 };

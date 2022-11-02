@@ -9,9 +9,21 @@ export const getAllSlugs = `
 `;
 
 export const getCurrentSlug = `
-  query GetCurrentSlug($slug: ID!) {
-    page(id: $slug, idType: URI) {
+  query GetCurrentSlug($id: ID!) {
+    page(id: $id, idType: URI) {
       title
+    }
+  }
+`;
+
+export const getMenu = `
+  query GetMenu($id: MenuLocationEnum!) {
+    menuItems(where: {location: $id}) {
+      nodes {
+        id
+        uri
+        label
+      }
     }
   }
 `;
@@ -244,8 +256,8 @@ const acfComponents = (postType: string) => `
   }
 `;
 
-export const getGlobalData = `
-  query GetGlobalData {
+export const getMenus = `
+  query GetMenus {
     menus {
       nodes {
         slug
@@ -269,17 +281,6 @@ export const getGlobalData = `
               }
             }
           }
-        }
-      }
-    }
-
-    
-
-    acfOptionsGlobalContent {
-      globalContent {
-        socials {
-          type
-          url
         }
       }
     }

@@ -1,12 +1,30 @@
 import React from 'react'
 import Link from 'next/link'
+import { getMenu } from '../../lib/query/pages.data'
+import { fetchAPI } from '../../lib/fetch-client'
 
-export default function Nav() {
+interface NavInterface {
+  menuItems: {
+    nodes: {
+      id: string
+      label: string
+      uri: string
+    }[]
+  }
+}
+
+const Nav = async () => {
+  const { menuItems } = await fetchAPI(getMenu, {id: 'PRIMARY'}) as NavInterface
+
   return (
     <ul>
-      <li><Link href="/">Home</Link></li>
-      <li><Link href="/about">About</Link></li>
-      <li><Link href="/broken">404</Link></li>
+      {menuItems.nodes.map(({ id, label, uri }) => (
+        <li key={id}>
+          <Link href={uri}>{label}</Link>
+        </li>
+      ))}
     </ul>
   )
 }
+
+export default Nav
