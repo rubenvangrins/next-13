@@ -40,7 +40,9 @@ const fetchPageData = async (slug: string) => {
       query: getCurrentSlug,
       variables: { slug },
     }),
-    cache: 'no-store',
+    next: {
+      revalidate: 1,
+    }
   });
 
   const json = await result.json();
