@@ -2,7 +2,7 @@ import { fetchAPI } from "../../lib/fetch-client";
 import { getAllSlugs, getCurrentSlug } from "../../lib/query/pages.data";
 
 const fetchDynamicPages = async () => {
-  const result = await fetch('https://rietveld.stellate.sh/', {
+  const result = await fetch('http://next13.gwst13.com/graphql', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -31,7 +31,7 @@ export async function generateStaticParams() {
 }
 
 const fetchPageData = async (slug: string) => {
-  const result = await fetch('https://rietveld.stellate.sh/', {
+  const result = await fetch('http://next13.gwst13.com/graphql', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -39,10 +39,7 @@ const fetchPageData = async (slug: string) => {
     body: JSON.stringify({
       query: getCurrentSlug,
       variables: { slug },
-    }),
-    next: {
-      revalidate: 1,
-    }
+    })
   });
 
   const json = await result.json();
