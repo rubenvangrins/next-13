@@ -1,6 +1,9 @@
-import Nav from '../components/Nav'
+// @ts-nocheck
+import React from 'react';
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+import Nav from '../components/Nav';
+
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <head>
@@ -13,5 +16,5 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {children}
       </body>
     </html>
-  )
+  );
 }

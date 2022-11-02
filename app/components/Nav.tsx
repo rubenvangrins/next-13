@@ -1,7 +1,9 @@
-import React from 'react'
-import Link from 'next/link'
-import { getMenu } from '../../lib/query/pages.data'
-import { fetchAPI } from '../../lib/fetch-client'
+import React from 'react';
+
+import Link from 'next/link';
+
+import { fetchAPI } from '../../lib/fetch-client';
+import { getMenu } from '../../lib/query/pages.data';
 
 interface NavInterface {
   menuItems: {
@@ -13,8 +15,10 @@ interface NavInterface {
   }
 }
 
-const Nav = async () => {
-  const { menuItems } = await fetchAPI(getMenu, {id: 'PRIMARY'}) as NavInterface
+export const revalidate = 1;
+
+export default async function Nav() {
+  const { menuItems } = await fetchAPI(getMenu, { id: 'PRIMARY' }) as NavInterface;
 
   return (
     <ul>
@@ -24,7 +28,5 @@ const Nav = async () => {
         </li>
       ))}
     </ul>
-  )
+  );
 }
-
-export default Nav

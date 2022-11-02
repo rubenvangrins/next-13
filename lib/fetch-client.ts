@@ -13,7 +13,7 @@ export const fetchAPI = async (
     body: JSON.stringify({
       query,
       variables,
-    })
+    }),
   });
 
   const json = await result.json();

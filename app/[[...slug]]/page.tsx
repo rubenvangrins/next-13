@@ -1,26 +1,24 @@
-import { fetchAPI } from "../../lib/fetch-client";
-import { getAllSlugs, getCurrentSlug } from "../../lib/query/pages.data";
+import { fetchAPI } from '../../lib/fetch-client';
+import { getCurrentSlug } from '../../lib/query/pages.data';
 
-export async function generateStaticParams() {
-  const { pages } = await fetchAPI(getAllSlugs);
+// export async function generateStaticParams() {
+//   const { pages } = await fetchAPI(getAllSlugs);
 
-  return pages.nodes.map(({ uri }: { uri: string }) => ({
-    slug: uri === '/' ? [''] : uri.split('/').filter((item) => item),
-  }));
-}
+//   return pages.nodes.map(({ uri }: { uri: string }) => ({
+//     slug: uri === '/' ? [''] : uri.split('/').filter((item) => item),
+//   }));
+// }
 
 export default async function Page({ params }: { params: { slug: string[] } }) {
-  const { page } = await fetchAPI(getCurrentSlug, {id: !params.slug ? '/' : params.slug.join('/')});
+  const { page } = await fetchAPI(getCurrentSlug, { id: !params.slug ? '/' : params.slug.join('/') });
 
   if (!page) {
     return (
       <h1>404</h1>
-    )
+    );
   }
 
   return (
-    <>
-      <h1>{page.title && page.title}</h1>
-    </>
-  )
+    <h1>{page.title && page.title}</h1>
+  );
 }
