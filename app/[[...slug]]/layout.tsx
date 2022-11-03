@@ -1,3 +1,4 @@
+// import Link from 'next/link';
 import React from 'react';
 
 import { fetchAPI } from '../../lib/fetch-client';
@@ -16,6 +17,10 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       </head>
       <body>
         <Nav menuItems={menuItems} />
+        {/* <ul>
+          <li><Link href="/">Home</Link></li>
+          <li><Link href="/about">About</Link></li>
+        </ul> */}
         {children}
       </body>
     </html>
