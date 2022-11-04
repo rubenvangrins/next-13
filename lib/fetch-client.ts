@@ -1,9 +1,11 @@
+/* eslint-disable no-console */
 export const fetchAPI = async (
   query: string,
   variables?: {
     id?: string,
     idType?: string,
   },
+  revalidate: boolean = false,
 ) => {
   const result = await fetch('http://next13.gwst13.com/graphql', {
     method: 'POST',
@@ -14,6 +16,7 @@ export const fetchAPI = async (
       query,
       variables,
     }),
+    cache: revalidate ? 'no-store' : 'force-cache',
   });
 
   const json = await result.json();
