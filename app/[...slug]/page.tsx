@@ -4,11 +4,11 @@ import { getAllSlugs, getCurrentSlug } from '../../lib/query/pages.data';
 export async function generateStaticParams() {
   const { pages } = await fetchAPI(getAllSlugs);
 
-  const filteredPages = pages.nodes.filter((page: any) => page.uri !== '/');
-
-  return filteredPages.map(({ uri }: { uri: string }) => ({
-    slug: uri === '/' ? [''] : uri.split('/').filter((item) => item),
-  }));
+  return pages.nodes
+    .filter(({ uri }: { uri: string }) => uri !== '/')
+    .map(({ uri }: { uri: string }) => ({
+      slug: uri.split('/').filter((item) => item),
+    }));
 }
 
 export default async function Page({ params }: { params: { slug: string[] } }) {

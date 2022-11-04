@@ -4,7 +4,6 @@ export const fetchAPI = async (
     id?: string,
     idType?: string,
   },
-  revalidate: boolean = false,
 ) => {
   const result = await fetch('http://next13.gwst13.com/graphql', {
     method: 'POST',
@@ -15,9 +14,6 @@ export const fetchAPI = async (
       query,
       variables,
     }),
-    next: {
-      revalidate: revalidate ? 1 : 0,
-    },
   });
 
   const json = await result.json();
