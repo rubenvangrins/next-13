@@ -1,5 +1,6 @@
-import Link from 'next/link';
 import React from 'react';
+
+import Link from 'next/link';
 
 // import { fetchAPI } from '../../lib/fetch-client';
 // import { getMenu } from '../../lib/query/pages.data';
@@ -20,6 +21,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <ul>
           <li><Link href="/">Home</Link></li>
           <li><Link href="/about">About</Link></li>
+          <li><Link href="/contact">Contact</Link></li>
         </ul>
         {children}
       </body>
