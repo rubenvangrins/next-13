@@ -1,32 +1,9 @@
+// @ts-nocheck
 import { ReactNode } from 'react';
 
-// import Link from 'next/link';
-
-import { getMenu } from '../lib/query/pages.data';
 import Nav from './components/Nav';
 
-const fetchNavigation = async () => {
-  const result = await fetch('http://next13.gwst13.com/graphql', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      query: getMenu,
-      variables: {
-        id: 'PRIMARY',
-      },
-    }),
-  });
-
-  const { data } = await result.json();
-
-  return data;
-};
-
 export default async function RootLayout({ children }: { children: ReactNode }) {
-  const { menuItems } = await fetchNavigation();
-
   return (
     <html lang="en">
       <head>
@@ -35,7 +12,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
         <link rel="icon" href="/favicon.ico" />
       </head>
       <body>
-        <Nav menuItems={menuItems} />
+        <Nav />
         {children}
       </body>
     </html>
