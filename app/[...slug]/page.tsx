@@ -1,17 +1,17 @@
 import { fetchAPI } from '../../lib/fetch-client';
-import { getPageData } from '../../lib/query/pages.data';
+import { getAllSlugs, getPageData } from '../../lib/query/pages.data';
 import Components from '../../src/shared/Components';
 import { PageInterface } from '../page';
 
-// export async function generateStaticParams() {
-//   const { pages } = await fetchAPI(getAllSlugs);
+export async function generateStaticParams() {
+  const { pages } = await fetchAPI(getAllSlugs);
 
-//   return pages.nodes
-//     .filter(({ uri }: { uri: string }) => uri !== '/')
-//     .map(({ uri }: { uri: string }) => ({
-//       slug: uri.split('/').filter((item) => item),
-//     }));
-// }
+  return pages.nodes
+    .filter(({ uri }: { uri: string }) => uri !== '/')
+    .map(({ uri }: { uri: string }) => ({
+      slug: uri.split('/').filter((item) => item),
+    }));
+}
 
 export default async function Page({ params }: { params: { slug: string[] } }) {
   const pageSlug = params.slug.join('/');
