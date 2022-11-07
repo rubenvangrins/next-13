@@ -3,7 +3,7 @@ import { ReactNode } from 'react';
 
 import { fetchAPI } from '../lib/fetch-client';
 import { getMenu } from '../lib/query/pages.data';
-import Nav from './components/Nav';
+import Nav from '../src/components/Nav';
 
 export default async function RootLayout({ children }: { children: ReactNode }) {
   const { menuItems: { nodes: menuItems } } = await fetchAPI(getMenu, { id: 'PRIMARY' }, true);

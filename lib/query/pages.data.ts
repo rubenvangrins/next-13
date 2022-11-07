@@ -8,10 +8,25 @@ export const getAllSlugs = `
   }
 `;
 
-export const getCurrentSlug = `
+export const getPageData = `
   query GetCurrentSlug($id: ID!) {
     page(id: $id, idType: URI) {
       title
+
+      contentType {
+        node {
+          graphqlSingleName
+        }
+      }
+
+      acfComponents {
+        components {
+          ... on Page_Acfcomponents_Components_Text {
+            fieldGroupName
+            body
+          }
+        }
+      }
     }
   }
 `;

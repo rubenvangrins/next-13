@@ -1,5 +1,7 @@
 import { fetchAPI } from '../../lib/fetch-client';
-import { getAllSlugs, getCurrentSlug } from '../../lib/query/pages.data';
+import { getAllSlugs, getPageData } from '../../lib/query/pages.data';
+import Components from '../../src/shared/Components';
+import { PageInterface } from '../page';
 
 export async function generateStaticParams() {
   const { pages } = await fetchAPI(getAllSlugs);
@@ -12,13 +14,18 @@ export async function generateStaticParams() {
 }
 
 export default async function Page({ params }: { params: { slug: string[] } }) {
-  const { page } = await fetchAPI(getCurrentSlug, { id: !params.slug ? '/' : params.slug.join('/') });
+  const { page } = await fetchAPI(getPageData, { id: !params.slug ? '/' : params.slug.join('/') }) as PageInterface;
 
   if (!page) {
     return (<h1>404</h1>);
   }
 
+  const { acfComponents: { components }, contentType: { node: { graphqlSingleName: postType } } } = page;
+
   return (
-    <h1>{page.title && page.title}</h1>
+    <>
+      <h1>{page.title && page.title}</h1>
+      <Components postType={postType} components={components} />
+    </>
   );
 }
