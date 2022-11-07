@@ -1,6 +1,7 @@
 import { fetchAPI } from '../../lib/fetch-client';
 import { getAllSlugs, getPageData } from '../../lib/query/pages.data';
-import Components from '../../src/shared/Components';
+import Text from '../../src/components/Text';
+import { capital } from '../../utils/text';
 import { PageInterface } from '../page';
 
 export async function generateStaticParams() {
@@ -27,7 +28,17 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
   return (
     <>
       <h1>{title && title}</h1>
-      <Components postType={postType} components={components} />
+
+      {components.map((component, index) => {
+        const { fieldGroupName } = component;
+
+        switch (fieldGroupName) {
+          case `${capital(postType)}_Acfcomponents_Components_Text`:
+            return <Text key={index} {...component} />;
+          default:
+            return null;
+        }
+      })}
     </>
   );
 }
