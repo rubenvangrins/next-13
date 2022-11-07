@@ -23,7 +23,7 @@ export default async function revalidate(
 
   try {
     await res.revalidate(req.query.slug as string);
-    console.log(`Revalidated cache for ${req.query.slug}`);
+    console.log(`Revalidated cache for ${req.query.slug}, ${res}`);
     return res.status(200).json({
       message: `Success! The cache for ${req.query.slug} was successfully revalidated.`,
     });
