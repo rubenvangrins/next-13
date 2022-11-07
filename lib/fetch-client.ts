@@ -16,7 +16,9 @@ export const fetchAPI = async (
       query,
       variables,
     }),
-    cache: revalidate ? 'no-store' : 'force-cache',
+    next: {
+      revalidate: revalidate ? 10 : undefined,
+    },
   });
 
   const json = await result.json();
