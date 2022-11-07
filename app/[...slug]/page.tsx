@@ -1,7 +1,7 @@
 import { fetchAPI } from '../../lib/fetch-client';
 import { getAllSlugs, getPageData } from '../../lib/query/pages.data';
-import Text from '../../src/components/Text';
-import { capital } from '../../utils/text';
+// import Text from '../../src/components/Text';
+// import { capital } from '../../utils/text';
 import { PageInterface } from '../page';
 
 export async function generateStaticParams() {
@@ -23,13 +23,15 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
     return (<h1>404</h1>);
   }
 
-  const { title, acfComponents: { components }, contentType: { node: { graphqlSingleName: postType } } } = page;
+  // const { title, acfComponents: { components }, contentType: { node: { graphqlSingleName: postType } } } = page;
+  const { title, content } = page;
 
   return (
     <>
       <h1>{title && title}</h1>
+      <div dangerouslySetInnerHTML={{ __html: content }} />
 
-      {components.map((component, index) => {
+      {/* {components.map((component, index) => {
         const { fieldGroupName } = component;
 
         switch (fieldGroupName) {
@@ -38,7 +40,7 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
           default:
             return null;
         }
-      })}
+      })} */}
     </>
   );
 }

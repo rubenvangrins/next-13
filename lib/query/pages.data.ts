@@ -19,14 +19,7 @@ export const getPageData = `
         }
       }
 
-      acfComponents {
-        components {
-          ... on Page_Acfcomponents_Components_Text {
-            fieldGroupName
-            body
-          }
-        }
-      }
+      content
     }
   }
 `;

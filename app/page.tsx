@@ -10,6 +10,8 @@ export interface PageInterface {
       components: ComponentInterface[];
     };
 
+    content: string
+
     contentType: {
       node: {
         graphqlSingleName: string;
