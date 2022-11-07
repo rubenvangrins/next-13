@@ -17,7 +17,6 @@ const fetchNavigation = async () => {
         id: 'PRIMARY',
       },
     }),
-    cache: 'no-store',
   });
 
   const { data } = await result.json();
