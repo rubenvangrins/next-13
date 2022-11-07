@@ -24,7 +24,9 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
   }
 
   // const { title, acfComponents: { components }, contentType: { node: { graphqlSingleName: postType } } } = page;
-  const { title, content } = page;
+  const { title, content, __typename: postType } = page;
+
+  console.log(postType);
 
   return (
     <>

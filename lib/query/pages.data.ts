@@ -11,14 +11,8 @@ export const getAllSlugs = `
 export const getPageData = `
   query GetCurrentSlug($id: ID!) {
     page(id: $id, idType: URI) {
+      __typename
       title
-
-      contentType {
-        node {
-          graphqlSingleName
-        }
-      }
-
       content
     }
   }

@@ -4,6 +4,7 @@ import { getPageData } from '../lib/query/pages.data';
 
 export interface PageInterface {
   page: {
+    __typename: string;
     title: string;
 
     acfComponents: {
@@ -11,12 +12,6 @@ export interface PageInterface {
     };
 
     content: string
-
-    contentType: {
-      node: {
-        graphqlSingleName: string;
-      };
-    };
   }
 }
 
