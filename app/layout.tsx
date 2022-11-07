@@ -2,12 +2,31 @@ import { ReactNode } from 'react';
 
 // import Link from 'next/link';
 
-import { fetchAPI } from '../lib/fetch-client';
 import { getMenu } from '../lib/query/pages.data';
 import Nav from './components/Nav';
 
+const fetchNavigation = async () => {
+  const result = await fetch('http://next13.gwst13.com/graphql', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      query: getMenu,
+      variables: {
+        id: 'PRIMARY',
+      },
+    }),
+    cache: 'no-store',
+  });
+
+  const { data } = await result.json();
+
+  return data;
+};
+
 export default async function RootLayout({ children }: { children: ReactNode }) {
-  const { menuItems } = await fetchAPI(getMenu, { id: 'PRIMARY' });
+  const { menuItems } = await fetchNavigation();
 
   return (
     <html lang="en">
@@ -18,13 +37,6 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
       </head>
       <body>
         <Nav menuItems={menuItems} />
-        {/* <nav>
-          <li>
-            <Link href="/">home</Link>
-            <Link href="/about">about</Link>
-            <Link href="/contact">contact</Link>
-          </li>
-        </nav> */}
         {children}
       </body>
     </html>
