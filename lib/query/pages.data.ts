@@ -17,6 +17,11 @@ export const getPageData = `
       acfComponents {
         test
       }
+      featuredImage {
+        node {
+          altText
+        }
+      }
     }
   }
 `;

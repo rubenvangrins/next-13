@@ -13,6 +13,12 @@ export interface PageInterface {
     };
 
     content: string
+
+    featuredImage: {
+      node: {
+        altText: string
+      }
+    }
   }
 }
 

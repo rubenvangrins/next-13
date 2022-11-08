@@ -24,13 +24,14 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
   }
 
   // const { title, acfComponents: { components }, contentType: { node: { graphqlSingleName: postType } } } = page;
-  const { title, content, __typename: postType, acfComponents: { test } } = page;
+  const { title, content, __typename: postType, acfComponents: { test }, featuredImage } = page;
 
   return (
     <>
       <h1>{title && title}</h1>
       <div dangerouslySetInnerHTML={{ __html: content }} />
       <div dangerouslySetInnerHTML={{ __html: test + postType }} />
+      {featuredImage && featuredImage.node.altText}
 
       {/* {components.map((component, index) => {
         const { fieldGroupName } = component;
