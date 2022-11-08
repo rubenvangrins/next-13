@@ -9,6 +9,7 @@ export interface PageInterface {
 
     acfComponents: {
       components: ComponentInterface[];
+      test: string
     };
 
     content: string

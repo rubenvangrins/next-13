@@ -14,6 +14,9 @@ export const getPageData = `
       __typename
       title
       content
+      acfComponents {
+        test
+      }
     }
   }
 `;
