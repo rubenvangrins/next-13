@@ -32,17 +32,6 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
       <div dangerouslySetInnerHTML={{ __html: content }} />
       <div dangerouslySetInnerHTML={{ __html: test + postType }} />
       {featuredImage && featuredImage.node.altText}
-
-      {/* {components.map((component, index) => {
-        const { fieldGroupName } = component;
-
-        switch (fieldGroupName) {
-          case `${capital(postType)}_Acfcomponents_Components_Text`:
-            return <Text key={index} {...component} />;
-          default:
-            return null;
-        }
-      })} */}
     </>
   );
 }
