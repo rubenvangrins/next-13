@@ -21,23 +21,17 @@ export default async function revalidate(
     });
   }
 
-  setTimeout(async () => {
-    try {
-      await res.revalidate(req.query.slug as string);
-      console.log(`Revalidated cache for ${req.query.slug}`);
+  try {
+    await res.revalidate(req.query.slug as string);
+    console.log(`Revalidated cache for ${req.query.slug}`);
 
-      return res.status(200).json({
-        message: `Success! The cache for ${req.query.slug} was successfully revalidated.`,
-      });
-    } catch (error: any) {
-      console.error(error.message);
-      return res.status(500).json({
-        message: error.message,
-      });
-    }
-  });
-
-  return res.status(200).json({
-    message: `Revalidating cache for ${req.query.slug}...`,
-  });
+    return res.status(200).json({
+      message: `Success! The cache for ${req.query.slug} was successfully revalidated.`,
+    });
+  } catch (error: any) {
+    console.error(error.message);
+    return res.status(500).json({
+      message: error.message,
+    });
+  }
 }

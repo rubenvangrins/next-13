@@ -1,8 +1,26 @@
+import { ComponentInterface } from '../../declare/global.components';
 import { fetchAPI } from '../../lib/fetch-client';
 import { getAllSlugs, getPageData } from '../../lib/query/pages.data';
-// import Text from '../../src/components/Text';
-// import { capital } from '../../utils/text';
-import { PageInterface } from '../page';
+
+export interface PageInterface {
+  page: {
+    __typename: string;
+    title: string;
+
+    acfComponents: {
+      components: ComponentInterface[];
+      test: string
+    };
+
+    content: string
+
+    featuredImage: {
+      node: {
+        altText: string
+      }
+    }
+  }
+}
 
 export async function generateStaticParams() {
   const { pages } = await fetchAPI(getAllSlugs);

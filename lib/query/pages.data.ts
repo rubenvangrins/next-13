@@ -37,3 +37,13 @@ export const getMenu = `
     }
   }
 `;
+
+export const getAllProjects = `
+  query GetAllProjects {
+    allProjects {
+      nodes {
+        title
+      }
+    }
+  }
+`;
