@@ -6,7 +6,7 @@ import { getMenu } from '../lib/query/pages.data';
 import Nav from '../src/components/Nav';
 
 export default async function RootLayout({ children }: { children: ReactNode }) {
-  const { menuItems: { nodes: menuItems } } = await fetchAPI(getMenu, { id: 'PRIMARY' });
+  const { menuItems: { nodes: menuItems } } = await fetchAPI(getMenu, { id: 'PRIMARY' }, true);
 
   return (
     <html lang="en">
