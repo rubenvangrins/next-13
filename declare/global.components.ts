@@ -3,5 +3,5 @@ export interface TextCompInterface {
 }
 
 export interface ComponentInterface extends TextCompInterface {
-  fieldGroupName?: string;
+  __typename: string;
 }

@@ -15,7 +15,12 @@ export const getPageData = `
       title
       content
       acfComponents {
-        test
+        components {
+          __typename
+          ... on Page_Acfcomponents_Components_Text {
+            body
+          }
+        }
       }
       featuredImage {
         node {

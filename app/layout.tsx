@@ -1,11 +1,13 @@
-// @ts-nocheck
-import { ReactNode } from 'react';
+import React from 'react';
 
 import { fetchAPI } from '../lib/fetch-client';
 import { getMenu } from '../lib/query/pages.data';
 import Nav from '../src/components/Nav';
+import RootStyleRegistry from './RootStyleRegistry';
 
-export default async function RootLayout({ children }: { children: ReactNode }) {
+import '../src/styles/reset.css';
+
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const { menuItems: { nodes: menuItems } } = await fetchAPI(getMenu, { id: 'PRIMARY' }, true);
 
   return (
@@ -16,8 +18,12 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
         <link rel="icon" href="/favicon.ico" />
       </head>
       <body>
-        <Nav menuItems={menuItems} />
-        {children}
+        <RootStyleRegistry>
+          <main>
+            <Nav menuItems={menuItems} />
+            {children}
+          </main>
+        </RootStyleRegistry>
       </body>
     </html>
   );

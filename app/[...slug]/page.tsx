@@ -1,6 +1,7 @@
 import { ComponentInterface } from '../../declare/global.components';
 import { fetchAPI } from '../../lib/fetch-client';
 import { getAllSlugs, getPageData } from '../../lib/query/pages.data';
+import Components from '../../src/shared/Components';
 
 export interface PageInterface {
   page: {
@@ -41,15 +42,14 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
     return (<h1>404</h1>);
   }
 
-  // const { title, acfComponents: { components }, contentType: { node: { graphqlSingleName: postType } } } = page;
-  const { title, content, __typename: postType, acfComponents: { test }, featuredImage } = page;
+  const { title, acfComponents: { components }, __typename } = page;
 
   return (
     <>
-      <h1>{title && title}</h1>
-      <div dangerouslySetInnerHTML={{ __html: content }} />
-      <div dangerouslySetInnerHTML={{ __html: test + postType }} />
-      {featuredImage && featuredImage.node.altText}
+      <h1>{title}</h1>
+      {components.length > 0 && (
+        <Components postType={__typename} components={components} />
+      )}
     </>
   );
 }

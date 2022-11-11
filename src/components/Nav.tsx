@@ -1,6 +1,9 @@
+'use client';
+
 import React from 'react';
 
 import Link from 'next/link';
+import styled from 'styled-components';
 
 export interface NavInterface {
   menuItems: {
@@ -12,12 +15,17 @@ export interface NavInterface {
 
 export default function Nav({ menuItems }: NavInterface) {
   return (
-    <ul>
+    <StyledUL>
       {menuItems.map(({ id, label, uri }) => (
         <li key={id}>
           <Link href={uri}>{label}</Link>
         </li>
       ))}
-    </ul>
+    </StyledUL>
   );
 }
+
+const StyledUL = styled.ul`
+  display: flex;
+  column-gap: 1rem;
+`;
