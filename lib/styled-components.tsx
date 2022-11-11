@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React from 'react';
 
 import { ServerStyleSheet, StyleSheetManager } from 'styled-components';
@@ -12,6 +13,7 @@ export function useStyledComponentsRegistry() {
     // Alternatively, you can use `styledComponentsStyleSheet.seal()`
     // But when using Suspense boundaries, the styles should be cleared:
     styledComponentsStyleSheet.instance.clearTag();
+    // eslint-disable-next-line react/jsx-no-useless-fragment
     return <>{styles}</>;
   };
 
