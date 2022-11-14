@@ -103,7 +103,7 @@ export default function ProjectGallery({ projects }: ProjectsInterface) {
 
       state.cards = [];
     };
-  }, []);
+  });
 
   return (
     <div>
