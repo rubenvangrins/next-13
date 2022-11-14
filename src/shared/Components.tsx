@@ -1,7 +1,7 @@
 'use client';
 
 import { ComponentInterface } from '../../declare/global.components';
-import Text from '../components/Text';
+import Text from '../components/Text/Text';
 
 export default function Components({ postType, components }: { postType: string, components: ComponentInterface[] }) {
   return (

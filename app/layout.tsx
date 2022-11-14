@@ -2,8 +2,7 @@ import React from 'react';
 
 import { fetchAPI } from '../lib/fetch-client';
 import { getMenu } from '../lib/query/pages.data';
-import Nav from '../src/components/Nav';
-import RootStyleRegistry from './RootStyleRegistry';
+import Nav from '../src/components/Nav/Nav';
 
 import '../src/styles/reset.css';
 
@@ -18,12 +17,8 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <link rel="icon" href="/favicon.ico" />
       </head>
       <body>
-        <RootStyleRegistry>
-          <main>
-            <Nav menuItems={menuItems} />
-            {children}
-          </main>
-        </RootStyleRegistry>
+        <Nav menuItems={menuItems} />
+        {children}
       </body>
     </html>
   );

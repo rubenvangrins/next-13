@@ -3,7 +3,8 @@
 import React from 'react';
 
 import Link from 'next/link';
-import styled from 'styled-components';
+
+import styles from './Nav.module.scss';
 
 export interface NavInterface {
   menuItems: {
@@ -15,17 +16,12 @@ export interface NavInterface {
 
 export default function Nav({ menuItems }: NavInterface) {
   return (
-    <StyledUL>
+    <ul className={styles.nav}>
       {menuItems.map(({ id, label, uri }) => (
         <li key={id}>
           <Link href={uri}>{label}</Link>
         </li>
       ))}
-    </StyledUL>
+    </ul>
   );
 }
-
-const StyledUL = styled.ul`
-  display: flex;
-  column-gap: 1rem;
-`;
